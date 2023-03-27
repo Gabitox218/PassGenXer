@@ -1,11 +1,14 @@
 import React from 'react';
 import ReactDOM from 'react-dom/client';
 import './index.css';
-import GeneradorContraseñas from './componentes/GeneradorContraseñas';
+import GeneradorContraseñas from './GeneradorContraseñas';
+import { LangProvider } from './contexto/langContext';
 
 const root = ReactDOM.createRoot(document.getElementById('root'));
 root.render(
-  <React.StrictMode>
-    <GeneradorContraseñas />
-  </React.StrictMode>
+  <LangProvider>
+    <React.StrictMode>
+      <GeneradorContraseñas />
+    </React.StrictMode>
+  </LangProvider>
 );

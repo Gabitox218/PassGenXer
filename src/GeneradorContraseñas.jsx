@@ -1,8 +1,13 @@
 import React, {useState, useEffect} from 'react';
 import './GeneradorContraseñas.css';
 import styled from 'styled-components';
-import { BotonIncrementar, BotonDisminuir, BotonCheck, BotonGenerar } from '../elementos/Botones (GeneradorContraseñas)';
-import generarPassword from '../funciones/generarPassword';
+import { BotonIncrementar, BotonDisminuir, BotonCheck, BotonGenerar } from './elementos/Botones (GeneradorContraseñas)';
+import generarPassword from './funciones/generarPassword';
+import Footer from './componentes/Footer';
+import NavBar from './componentes/Navbar';
+import { FormattedMessage } from 'react-intl';
+import { CopyToClipboard } from 'react-copy-to-clipboard';
+
 
 const GeneradorContraseñas = () => {
 	const [configuracion, cambiarConfiguracion] = useState({
@@ -72,33 +77,54 @@ const GeneradorContraseñas = () => {
 	}
 
 	return (
-		<div className="contenedorGeneradorContraseñas">
-			<form onSubmit={onSubmit}>
-				<Fila>
-					<label>Numero de caracteres:</label>
-					<Controles>
-						<BotonDisminuir click={disminuirNumeroCaracteres} />
-						<span>{configuracion.numeroDeCaracteres}</span>
-						<BotonIncrementar click={incrementarNumeroCaracteres} />
-					</Controles>
-				</Fila>
-				<Fila>
-					<label>¿Incluir Simbolos?</label>
-					<BotonCheck seleccionado={configuracion.simbolos} click={toggleSimbolos} />
-				</Fila>
-				<Fila>
-					<label>¿Incluir Numeros?</label>
-					<BotonCheck seleccionado={configuracion.numeros} click={toggleNumeros} />
-				</Fila>
-				<Fila>
-					<label>¿Incluir Mayusculas?</label>
-					<BotonCheck seleccionado={configuracion.mayusculas} click={toggleMayusculas} />
-				</Fila>
-				<Fila>
-					<BotonGenerar />
-					<Input type="text" readOnly={true} value={passwordGenerada} />
-				</Fila>
-			</form>
+		<div className='contenedorApp'>
+			<NavBar />
+			<div className="contenedorGeneradorContraseñas">
+				<form onSubmit={onSubmit}>
+					<Fila>
+						<label>
+							<FormattedMessage id="generator.numberGenerator" defaultMessage="Number of characters:"/>
+						</label>
+						<Controles>
+							<BotonDisminuir click={disminuirNumeroCaracteres} />
+							<span className='numeroGenerado'>{configuracion.numeroDeCaracteres}</span>
+							<BotonIncrementar click={incrementarNumeroCaracteres} />
+						</Controles>
+					</Fila>
+					<Fila>
+						<label>
+							<FormattedMessage id="generator.symbols" defaultMessage="Include symbols?"/>
+						</label>
+						<BotonCheck seleccionado={configuracion.simbolos} click={toggleSimbolos} />
+					</Fila>
+					<Fila>
+						<label>
+							<FormattedMessage id="generator.numbers" defaultMessage="Include numbers?"/>
+						</label>
+						<BotonCheck seleccionado={configuracion.numeros} click={toggleNumeros} />
+					</Fila>
+					<Fila>
+						<label>
+							<FormattedMessage id="generator.uppercase" defaultMessage="Include uppercase?"/>
+						</label>
+						<BotonCheck seleccionado={configuracion.mayusculas} click={toggleMayusculas} />
+					</Fila>
+					<Fila>
+						<BotonGenerar />
+						<div>
+							<Input type="text" readOnly={true} value={passwordGenerada} />
+							<CopyToClipboard text={passwordGenerada}>
+  							  <button className="botonCopiar">
+  							    <svg>
+  							      <use xlinkHref="http://www.w3.org/2000/svg"></use>
+  							    </svg>
+  							  </button>
+  							</CopyToClipboard>
+						</div>
+					</Fila>
+				</form>
+			</div>
+			<Footer />
 		</div>
 	);
 }
@@ -131,17 +157,16 @@ const Controles = styled.div`
 
 const Input = styled.input`
 	width: 100%;
-	background: none;
+	background: #888;
 	border-radius: 4px;
-	border: 1px solid rgba(255,255,255, .25);
+	border: 1px solid #144f13;
 	color: #fff;
 	height: 40px;
 	line-height: 40px;
-	cursor: pointer;
 	transition: all .3s ease;
 
 	&:hover {
-		border: 1px solid rgba(255,255,255, .50);
+		border: 1px solid #212139;
 	}
 
 	&::selection {

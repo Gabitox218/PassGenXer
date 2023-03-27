@@ -1,0 +1,10 @@
+{
+	"generator.numberGenerator": "Number of characters:",
+	"generator.symbols": "Include symbols?",
+	"generator.numbers": "Include numbers?",
+	"generator.uppercase": "Include uppercase?",
+	"generator.buttonGenerate": "Generate",
+
+	"footer.copyright": "Copyright",
+	"footer.text": "All rights reserved."
+}

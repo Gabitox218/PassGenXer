@@ -1,0 +1,30 @@
+.footer {
+	margin-top: auto;
+}
+
+
+.copyright {
+  background: #888;
+  width: 100%;
+  padding: 0px 0px 6px 0px;
+}
+
+.copyright > p {
+	font-size: 1em;
+  margin: 5px 0px 0px 0px;
+  text-align: center;
+}
+
+
+@media (max-width: 660px) {
+    .copyright > p {
+		font-size: .8em;
+	}
+  }
+
+  
+@media (max-width: 484px) {
+    .copyright > p {
+		font-size: .6em;
+	}
+  }

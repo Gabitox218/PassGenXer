@@ -1,0 +1,37 @@
+@import url('https://fonts.googleapis.com/css2?family=Roboto&display=swap');
+
+
+.contenedorApp {
+	height: 97vh;
+	width: 100vw;
+}
+
+.contenedorGeneradorContraseñas {
+	display: flex;
+    align-items: center;
+    flex-direction: column;
+	height: 76vh;
+}
+
+label {
+	line-height: 40px;
+	text-align: center;
+}
+
+input {
+	text-align: center;
+	border: none;
+}
+
+.numeroGenerado {
+	line-height: 40px;
+    background: rgb(20, 79, 19);
+	padding: 0px 40px;
+	border-radius: 4px;
+	color: #fff;
+}
+
+.botonCopiar {
+	width: 40px;
+	height: 40px;
+}
