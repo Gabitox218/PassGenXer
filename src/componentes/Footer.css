@@ -4,9 +4,10 @@
 
 
 .copyright {
-  background: #888;
+  background: transparent;
   width: 100%;
   padding: 0px 0px 6px 0px;
+  color: #fff;
 }
 
 .copyright > p {

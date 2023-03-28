@@ -1,4 +1,4 @@
-import React, {useState, useEffect} from 'react';
+import React, { useState, useEffect, useContext } from 'react';
 import './GeneradorContraseñas.css';
 import styled from 'styled-components';
 import { BotonIncrementar, BotonDisminuir, BotonCheck, BotonGenerar } from './elementos/Botones (GeneradorContraseñas)';
@@ -7,15 +7,34 @@ import Footer from './componentes/Footer';
 import NavBar from './componentes/Navbar';
 import { FormattedMessage } from 'react-intl';
 import { CopyToClipboard } from 'react-copy-to-clipboard';
+import { FaCopy } from 'react-icons/fa';
+import { langContext } from './contexto/langContext';
 
 
 const GeneradorContraseñas = () => {
-	const [configuracion, cambiarConfiguracion] = useState({
-		numeroDeCaracteres: 7,
-		simbolos: true,
-		numeros: true,
-		mayusculas: true
-	});
+	const {configuracionGenerador, cambiarConfiguracionGenerador} = useContext(langContext);
+	
+	const incrementarNumeroCaracteres = () => {
+		cambiarConfiguracionGenerador({numeroDeCaracteres: configuracionGenerador.numeroDeCaracteres + 1});
+	};
+	
+  	const disminuirNumeroCaracteres = () => {
+  	  if (configuracionGenerador.numeroDeCaracteres > 1) {
+  	    cambiarConfiguracionGenerador({numeroDeCaracteres: configuracionGenerador.numeroDeCaracteres - 1});
+  	  }
+  	};
+
+  	const toggleSimbolos = () => {
+  	  cambiarConfiguracionGenerador({simbolos: !configuracionGenerador.simbolos});
+  	};
+
+  	const toggleNumeros = () => {
+  	  cambiarConfiguracionGenerador({numeros: !configuracionGenerador.numeros});
+  	};
+
+  	const toggleMayusculas = () => {
+  	  cambiarConfiguracionGenerador({mayusculas: !configuracionGenerador.mayusculas});
+  	};
 
 	const [passwordGenerada, cambiarPasswordGenerada] = useState('');
 
@@ -25,55 +44,13 @@ const GeneradorContraseñas = () => {
 	  }, []);
 
 	useEffect(() => {
-		cambiarPasswordGenerada(generarPassword(configuracion));
-	}, [configuracion]);
-
-	const incrementarNumeroCaracteres = () => {
-		cambiarConfiguracion((configuracionAnterior) => {
-			const nuevaConfiguracion = {...configuracionAnterior};
-			nuevaConfiguracion.numeroDeCaracteres += 1;
-			return nuevaConfiguracion; 
-		});
-	}
-
-	const disminuirNumeroCaracteres = () => {
-		if(configuracion.numeroDeCaracteres > 1){
-			cambiarConfiguracion((configuracionAnterior) => {
-				const nuevaConfiguracion = {...configuracionAnterior};
-				nuevaConfiguracion.numeroDeCaracteres -= 1;
-				return nuevaConfiguracion; 
-			});
-		}
-	}
-
-	const toggleSimbolos = () => {
-		cambiarConfiguracion((configuracionAnterior) => {
-			const nuevaConfiguracion = {...configuracionAnterior};
-			nuevaConfiguracion.simbolos = !nuevaConfiguracion.simbolos;
-			return nuevaConfiguracion; 
-		});
-	}
-
-	const toggleNumeros = () => {
-		cambiarConfiguracion((configuracionAnterior) => {
-			const nuevaConfiguracion = {...configuracionAnterior};
-			nuevaConfiguracion.numeros = !nuevaConfiguracion.numeros;
-			return nuevaConfiguracion; 
-		});
-	}
-
-	const toggleMayusculas = () => {
-		cambiarConfiguracion((configuracionAnterior) => {
-			const nuevaConfiguracion = {...configuracionAnterior};
-			nuevaConfiguracion.mayusculas = !nuevaConfiguracion.mayusculas;
-			return nuevaConfiguracion; 
-		});
-	}
+		cambiarPasswordGenerada(generarPassword(configuracionGenerador));
+	}, [configuracionGenerador]);
 
 	const onSubmit = (e) => {
 		e.preventDefault();
 
-		cambiarPasswordGenerada(generarPassword(configuracion));
+		cambiarPasswordGenerada(generarPassword(configuracionGenerador));
 	}
 
 	return (
@@ -87,7 +64,7 @@ const GeneradorContraseñas = () => {
 						</label>
 						<Controles>
 							<BotonDisminuir click={disminuirNumeroCaracteres} />
-							<span className='numeroGenerado'>{configuracion.numeroDeCaracteres}</span>
+							<span className='numeroGenerado'>{configuracionGenerador.numeroDeCaracteres}</span>
 							<BotonIncrementar click={incrementarNumeroCaracteres} />
 						</Controles>
 					</Fila>
@@ -95,29 +72,27 @@ const GeneradorContraseñas = () => {
 						<label>
 							<FormattedMessage id="generator.symbols" defaultMessage="Include symbols?"/>
 						</label>
-						<BotonCheck seleccionado={configuracion.simbolos} click={toggleSimbolos} />
+						<BotonCheck seleccionado={configuracionGenerador.simbolos} click={toggleSimbolos} />
 					</Fila>
 					<Fila>
 						<label>
 							<FormattedMessage id="generator.numbers" defaultMessage="Include numbers?"/>
 						</label>
-						<BotonCheck seleccionado={configuracion.numeros} click={toggleNumeros} />
+						<BotonCheck seleccionado={configuracionGenerador.numeros} click={toggleNumeros} />
 					</Fila>
 					<Fila>
 						<label>
 							<FormattedMessage id="generator.uppercase" defaultMessage="Include uppercase?"/>
 						</label>
-						<BotonCheck seleccionado={configuracion.mayusculas} click={toggleMayusculas} />
+						<BotonCheck seleccionado={configuracionGenerador.mayusculas} click={toggleMayusculas} />
 					</Fila>
 					<Fila>
 						<BotonGenerar />
-						<div>
+						<div className='contenedorInputCopy'>
 							<Input type="text" readOnly={true} value={passwordGenerada} />
 							<CopyToClipboard text={passwordGenerada}>
   							  <button className="botonCopiar">
-  							    <svg>
-  							      <use xlinkHref="http://www.w3.org/2000/svg"></use>
-  							    </svg>
+								<FaCopy />
   							  </button>
   							</CopyToClipboard>
 						</div>
@@ -138,6 +113,7 @@ const Fila = styled.div`
 	display: grid;
 	grid-template-columns: 1fr 1fr;
 	gap: 10px;
+	justify-items: center;
 `;
 
 const Controles = styled.div`
@@ -156,7 +132,7 @@ const Controles = styled.div`
 `;
 
 const Input = styled.input`
-	width: 100%;
+	width: 524px;
 	background: #888;
 	border-radius: 4px;
 	border: 1px solid #144f13;
@@ -164,6 +140,7 @@ const Input = styled.input`
 	height: 40px;
 	line-height: 40px;
 	transition: all .3s ease;
+	cursor: default;
 
 	&:hover {
 		border: 1px solid #212139;

@@ -68,7 +68,7 @@ const Boton = styled.button`
 	border-radius: 4px;
 	cursor: pointer;
 	transition: all .3s ease;
-	padding: 0px 6vw;
+	padding: 0px 7vw;
 
 	&:hover {
 		background: #2eab4d;
@@ -76,6 +76,7 @@ const Boton = styled.button`
 `;
 
 const BtnGenerar = styled(Boton)`
+	max-width: 300px !important;
 	svg {
 		margin-left: 10px;
 	}

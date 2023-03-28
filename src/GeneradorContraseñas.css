@@ -16,6 +16,9 @@
 label {
 	line-height: 40px;
 	text-align: center;
+	color: #fff;
+	font-size: 26px;
+	letter-spacing: 3px;
 }
 
 input {
@@ -25,13 +28,33 @@ input {
 
 .numeroGenerado {
 	line-height: 40px;
-    background: rgb(20, 79, 19);
+    background: #277d3c;
 	padding: 0px 40px;
 	border-radius: 4px;
 	color: #fff;
+	cursor: default;
+}
+
+.contenedorInputCopy {
+	position: relative;
 }
 
 .botonCopiar {
-	width: 40px;
-	height: 40px;
+	position: absolute;
+    background: #277d3c;
+    border-radius: 5px;
+    padding: 3.6px;
+    right: -50px;
+    top: 0px;
+}
+
+.botonCopiar:hover {
+	background: #2eab4d;
+}
+
+.botonCopiar svg {
+	color: #fff;
+    cursor: pointer;
+    width: 30px;
+    height: 30px;
 }
