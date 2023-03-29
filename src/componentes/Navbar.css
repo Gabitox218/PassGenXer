@@ -24,3 +24,39 @@
     cursor: pointer;
 }
 
+@media (max-width: 740px) {
+    .iconPortfolio > a > img {
+        width: 70px;
+        margin: 5px 0px 0px 10px;
+    }
+
+    .banderas button{
+        margin: 5px 10px 0px 0px;
+    }
+    
+    .banderas > button > img {
+        width: 40px;
+    }
+}
+
+@media (max-width: 520px) {
+    .banderas {
+        display: flex;
+        flex-direction: column;
+    }
+}
+
+@media (max-width: 400px) {
+    .iconPortfolio > a > img {
+        width: 50px;
+        margin: 5px 0px 0px 5px;
+    }
+
+    .banderas button{
+        margin: 5px 5px 0px 0px;
+    }
+    
+    .banderas > button > img {
+        width: 30px;
+    }
+}

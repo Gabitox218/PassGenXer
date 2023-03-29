@@ -1,7 +1,7 @@
 import React, { useState, useEffect, useContext } from 'react';
 import './GeneradorContraseñas.css';
 import styled from 'styled-components';
-import { BotonIncrementar, BotonDisminuir, BotonCheck, BotonGenerar } from './elementos/Botones (GeneradorContraseñas)';
+import { BotonIncrementar, BotonDisminuir, BotonCheck, BotonGenerar } from './componentes/Botones';
 import generarPassword from './funciones/generarPassword';
 import Footer from './componentes/Footer';
 import NavBar from './componentes/Navbar';
@@ -13,6 +13,7 @@ import { langContext } from './contexto/langContext';
 
 const GeneradorContraseñas = () => {
 	const {configuracionGenerador, cambiarConfiguracionGenerador} = useContext(langContext);
+	const [copiado, cambiarEstadoCopiado] = useState(false);
 	
 	const incrementarNumeroCaracteres = () => {
 		cambiarConfiguracionGenerador({numeroDeCaracteres: configuracionGenerador.numeroDeCaracteres + 1});
@@ -53,12 +54,20 @@ const GeneradorContraseñas = () => {
 		cambiarPasswordGenerada(generarPassword(configuracionGenerador));
 	}
 
+	const onClickCopy = () => {
+		navigator.clipboard.writeText(passwordGenerada);
+		cambiarEstadoCopiado(true);
+		setTimeout(() => {
+		  cambiarEstadoCopiado(false);
+		}, 3000);
+	  };
+
 	return (
 		<div className='contenedorApp'>
 			<NavBar />
 			<div className="contenedorGeneradorContraseñas">
-				<form onSubmit={onSubmit}>
-					<Fila>
+				<form className='formularioGeneradorContraseñas' onSubmit={onSubmit}>
+					<div className="fila">
 						<label>
 							<FormattedMessage id="generator.numberGenerator" defaultMessage="Number of characters:"/>
 						</label>
@@ -67,36 +76,44 @@ const GeneradorContraseñas = () => {
 							<span className='numeroGenerado'>{configuracionGenerador.numeroDeCaracteres}</span>
 							<BotonIncrementar click={incrementarNumeroCaracteres} />
 						</Controles>
-					</Fila>
-					<Fila>
+					</div>
+					<div className="fila">
 						<label>
 							<FormattedMessage id="generator.symbols" defaultMessage="Include symbols?"/>
 						</label>
 						<BotonCheck seleccionado={configuracionGenerador.simbolos} click={toggleSimbolos} />
-					</Fila>
-					<Fila>
+					</div>
+					<div className="fila">
 						<label>
 							<FormattedMessage id="generator.numbers" defaultMessage="Include numbers?"/>
 						</label>
 						<BotonCheck seleccionado={configuracionGenerador.numeros} click={toggleNumeros} />
-					</Fila>
-					<Fila>
+					</div>
+					<div className="fila">
 						<label>
 							<FormattedMessage id="generator.uppercase" defaultMessage="Include uppercase?"/>
 						</label>
 						<BotonCheck seleccionado={configuracionGenerador.mayusculas} click={toggleMayusculas} />
-					</Fila>
-					<Fila>
+					</div>
+					<div className="fila">
 						<BotonGenerar />
-						<div className='contenedorInputCopy'>
-							<Input type="text" readOnly={true} value={passwordGenerada} />
-							<CopyToClipboard text={passwordGenerada}>
-  							  <button className="botonCopiar">
-								<FaCopy />
-  							  </button>
-  							</CopyToClipboard>
-						</div>
-					</Fila>
+						<div className="contenedorInputCopy">
+    					  <Input type="text" readOnly={true} value={passwordGenerada} />
+    					  <CopyToClipboard text={passwordGenerada}>
+    					    <button className="botonCopiar" onClick={onClickCopy}>
+    					      <FaCopy />
+    					    </button>
+    					  </CopyToClipboard>
+    					  {copiado && (
+    					    <div className="mensajeExito">
+    					      <FormattedMessage
+    					        id="generator.copiedToClipboard"
+    					        defaultMessage="Copied to clipboard!"
+    					      />
+    					    </div>
+    					  )}
+    					</div>
+					</div>
 				</form>
 			</div>
 			<Footer />
@@ -105,16 +122,6 @@ const GeneradorContraseñas = () => {
 }
  
 export default GeneradorContraseñas;
-
-
-const Fila = styled.div`
-	margin-bottom: 30px;
-	padding-top: 19px;
-	display: grid;
-	grid-template-columns: 1fr 1fr;
-	gap: 10px;
-	justify-items: center;
-`;
 
 const Controles = styled.div`
 	display: flex;
@@ -132,7 +139,7 @@ const Controles = styled.div`
 `;
 
 const Input = styled.input`
-	width: 524px;
+	width: 40vw;
 	background: #888;
 	border-radius: 4px;
 	border: 1px solid #144f13;
@@ -152,5 +159,9 @@ const Input = styled.input`
 
 	&::-moz-selection {
 		background: #212139;
+	}
+
+	@media (max-width: 740px) {
+		width: 60vw;
 	}
 `;

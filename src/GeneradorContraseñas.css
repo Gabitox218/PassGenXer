@@ -2,7 +2,6 @@
 
 
 .contenedorApp {
-	height: 97vh;
 	width: 100vw;
 }
 
@@ -24,6 +23,14 @@ label {
 input {
 	text-align: center;
 	border: none;
+}
+
+.fila {
+	margin-bottom: 30px;
+	padding-top: 19px;
+	display: grid;
+	grid-template-columns: 1fr 1fr;
+	justify-items: center;
 }
 
 .numeroGenerado {
@@ -57,4 +64,29 @@ input {
     cursor: pointer;
     width: 30px;
     height: 30px;
+}
+
+.mensajeExito {
+	color: #02a802;
+	font-weight: 600;
+	font-size: .8em;
+	text-align: center;
+}
+
+@media (max-width: 740px) {
+	.formularioGeneradorContraseñas {
+		position: absolute;
+    	top: 0;
+	}
+
+	label {
+		font-size: 16px;
+		letter-spacing: 2px;
+	}
+
+	.fila {
+		margin-bottom: 20px;
+		padding-top: 10px;
+		grid-template-columns: 1fr;
+	}
 }

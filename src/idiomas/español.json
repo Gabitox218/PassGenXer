@@ -4,6 +4,7 @@
 	"generator.numbers": "¿Incluir números?",
 	"generator.uppercase": "¿Incluir mayúsculas?",
 	"generator.buttonGenerate": "Generar",
+	"generator.copiedToClipboard": "¡Copiado al portapapeles!",
 
 	"footer.copyright": "Derechos de Autor",
 	"footer.text": "Todos los derechos reservados."

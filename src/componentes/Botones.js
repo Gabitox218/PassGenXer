@@ -4,21 +4,21 @@ import styled from 'styled-components';
 
 export const BotonDisminuir = ({click}) => {
 	return (
-		<Boton onClick={click}>
+		<BtnVariacion onClick={click}>
 			<svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" className="bi bi-dash-lg" viewBox="0 0 16 16">
 				<path d="M0 8a1 1 0 0 1 1-1h14a1 1 0 1 1 0 2H1a1 1 0 0 1-1-1z"/>
 			</svg>
-		</Boton>
+		</BtnVariacion>
 	);
 }
 
 export const BotonIncrementar = ({click}) => {
 	return (
-		<Boton onClick={click}>
+		<BtnVariacion onClick={click}>
 			<svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" className="bi bi-plus-lg" viewBox="0 0 16 16">
 				<path d="M8 0a1 1 0 0 1 1 1v6h6a1 1 0 1 1 0 2H9v6a1 1 0 1 1-2 0V9H1a1 1 0 0 1 0-2h6V1a1 1 0 0 1 1-1z"/>
 			</svg>
-		</Boton>
+		</BtnVariacion>
 	);
 }
 
@@ -54,7 +54,7 @@ export const BotonGenerar = () => {
 }
 
 const Boton = styled.button`
-	width: 100%;
+	width: 26.6vw;
 	background: #277d3c;
 	color: #fff;
 	display: inline-flex;
@@ -68,10 +68,21 @@ const Boton = styled.button`
 	border-radius: 4px;
 	cursor: pointer;
 	transition: all .3s ease;
-	padding: 0px 7vw;
 
 	&:hover {
 		background: #2eab4d;
+	}
+
+	@media (max-width: 740px) {
+		width: 40vw;
+	}
+`;
+
+const BtnVariacion = styled(Boton)`
+	width: 10vw !important;
+
+	@media (max-width: 740px) {
+		width: 13vw !important;
 	}
 `;
 
@@ -79,6 +90,11 @@ const BtnGenerar = styled(Boton)`
 	max-width: 300px !important;
 	svg {
 		margin-left: 10px;
+	}
+
+	@media (max-width: 740px) {
+		margin: 0px 0px 10px 0px;
+		font-size: 16px;
 	}
 `;
 

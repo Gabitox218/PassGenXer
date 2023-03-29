@@ -6,26 +6,33 @@
 .copyright {
   background: transparent;
   width: 100%;
-  padding: 0px 0px 6px 0px;
   color: #fff;
+  display: flex;
+  justify-content: center;
 }
 
 .copyright > p {
 	font-size: 1em;
   margin: 5px 0px 0px 0px;
   text-align: center;
+  display: inline-block;
+  padding: 0px 3px;
 }
 
-
-@media (max-width: 660px) {
-    .copyright > p {
-		font-size: .8em;
-	}
+@media (max-width: 740px) {
+  .footer {
+    position: absolute;
+    bottom: 0;
+    width: 100%;
   }
 
+  .copyright {
+    padding: 0px 0px 6px 0px;
+    display: block;
+  }
   
-@media (max-width: 484px) {
-    .copyright > p {
-		font-size: .6em;
-	}
+  .copyright > p {
+    text-align: center;
+    display: block;
   }
+}
