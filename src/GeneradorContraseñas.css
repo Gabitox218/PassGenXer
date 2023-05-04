@@ -8,6 +8,7 @@
 .contenedorGeneradorContraseñas {
 	display: flex;
     align-items: center;
+	justify-content: center;
     flex-direction: column;
 	height: 76vh;
 }
@@ -74,9 +75,13 @@ input {
 }
 
 @media (max-width: 740px) {
+	.contenedorGeneradorContraseñas {
+		height: 90vh;
+	}
+
 	.formularioGeneradorContraseñas {
 		position: absolute;
-    	top: 0;
+    	top: 40px;
 	}
 
 	label {

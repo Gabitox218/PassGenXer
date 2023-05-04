@@ -42,7 +42,6 @@
 @media (max-width: 520px) {
     .banderas {
         display: flex;
-        flex-direction: column;
     }
 }
 
