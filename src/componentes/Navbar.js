@@ -11,7 +11,7 @@ function NavBar() {
   return (
     <div className="navbar">
       <div className="iconPortfolio">
-        <a href="https://www.gabyxer.com">
+        <a href="https://www.gabyxer.com.ar">
           <img src={GabyXer} alt="GabyXer"/>
         </a>
       </div>
