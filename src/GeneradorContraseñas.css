@@ -3,7 +3,6 @@
 
 .contenedorApp {
 	width: 100vw;
-	height: 100vh;
 }
 
 .contenedorGeneradorContraseñas {
@@ -76,10 +75,6 @@ input {
 }
 
 @media (max-width: 740px) {
-	.contenedorGeneradorContraseñas {
-		height: 90vh;
-	}
-
 	.formularioGeneradorContraseñas {
 		position: absolute;
     	top: 40px;
