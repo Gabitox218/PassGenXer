@@ -76,8 +76,8 @@ input {
 
 @media (max-width: 740px) {
 	.formularioGeneradorContraseñas {
-		position: absolute;
-    	top: 40px;
+		position: relative;
+    	top: 0px;
 	}
 
 	label {
