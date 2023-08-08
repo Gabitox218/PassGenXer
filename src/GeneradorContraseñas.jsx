@@ -40,8 +40,7 @@ const GeneradorContraseñas = () => {
 	const [passwordGenerada, cambiarPasswordGenerada] = useState('');
 
 	useEffect(() => {
-		// Actualizar el título de la página con "Generar Contraseña"
-		document.title = `Generar Contraseña`;
+		document.title = `PassGenXer`;
 	  }, []);
 
 	useEffect(() => {
